@@ -2,7 +2,8 @@ const rgbPalette = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#219
 let mode = "normal", size = 16, currentColor = '#000000', mouseDown = false;
 document.body.onmousedown = (e) => {
   mouseDown = true;
-  e.preventDefault();}
+  e.preventDefault();
+}
 document.body.onmouseup = () => (mouseDown = false)
 
 function generateGrid() {
@@ -17,7 +18,9 @@ function generateGrid() {
     square.setAttribute('class', 'area');
     square.style.backgroundColor = '#ffffff';
     canvas.appendChild(square);
-  }
+  };
+  const sizeDisplay = document.querySelector('.size');
+  sizeDisplay.textContent = `Size : ${size}`; 
   cursor();
 }
 
