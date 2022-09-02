@@ -17,7 +17,9 @@ function generateGrid() {
     square.setAttribute('class', 'area');
     square.style.backgroundColor = '#ffffff';
     canvas.appendChild(square);
-  }
+  };
+  const sizeDisplay = document.querySelector('.size');
+  sizeDisplay.textContent = `Size : ${size}`; 
   cursor();
 }
 

@@ -97,4 +97,9 @@ input {
   box-shadow: -10px -10px 24px -3px rgba(0,0,0,0.52);
 }
 
-/* enlarge buttons
+.size {
+  font-size: 15px;
+  font-family: 'Great Vibes', cursive;
+  color: rgb(247, 247, 33);
+  margin: 20px 0;
+}
