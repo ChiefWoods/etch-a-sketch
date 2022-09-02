@@ -1,6 +1,7 @@
 :root {
   max-height: 100vh;
-  --heightA: 500px;
+  --rowNum: 16;
+  --columnNum: 16;
 }
 
 .container {
@@ -12,7 +13,7 @@
   height: 92.5%;
 }
 
-button {
+button, input {
   margin: 25px 0 25px 0;
 }
 
@@ -37,11 +38,12 @@ button {
 }
 
 .canvas {
+  display: grid;
   background-color: aliceblue;
   width: 35vw;
   height: 35vw;
-  grid-template-rows: repeat(16, 1fr);
-  grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(var(--columnNum), 1fr);
+  grid-template-rows: repeat(var(--rowNum), 1fr);
 }
 
 .knobs {
