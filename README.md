@@ -1,3 +1,3 @@
-# odin-etch-a-sketch
+# Etch-A-Sketch
 
-Project on etch-a-sketch
+Project for The Odin Project
