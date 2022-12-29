@@ -1,3 +1,3 @@
 # Etch-A-Sketch
 
-Project for The Odin Project
+Web drawing pad for The Odin Project
