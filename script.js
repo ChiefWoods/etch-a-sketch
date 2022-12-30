@@ -5,7 +5,7 @@ const canvas = document.querySelector('.canvas');
 const color = document.querySelector('input[type="color"]');
 const fill = document.querySelector('button[value="fill"]');
 const clear = document.querySelector('button[value="clear"]');
-const size = document.querySelector('.size');
+const sizes = document.querySelectorAll('.size');
 const range = document.querySelector('input[type="range"]');
 
 canvas.onmousedown = (e) => {
@@ -48,7 +48,9 @@ clear.addEventListener('click', () => {
 })
 
 range.addEventListener('input', () => {
-  size.textContent = `${range.value}`;
+  sizes.forEach(size => {
+    size.textContent = `${range.value}`;
+  })
 })
 
 range.addEventListener('change', () => {
@@ -57,6 +59,11 @@ range.addEventListener('change', () => {
 })
 
 canvas.addEventListener('mouseover', e => {
+  canvas.style.setProperty('cursor', 'pointer');
+  if (!['normal', 'shade', 'rgb', 'erase'].includes(mode)) {
+    canvas.style.setProperty('cursor', 'not-allowed');
+    return;
+  }
   if (!isMouseDown) return;
   let box = e.target;
   switch (mode) {
