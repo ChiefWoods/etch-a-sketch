@@ -1,4 +1,6 @@
-var selectedColor = '#000000', mode = 'normal', isMouseDown = false;
+let selectedColor = '#000000';
+let mode = 'normal';
+let isMouseDown = false;
 
 const buttons = document.querySelectorAll('.mode');
 const canvas = document.querySelector('.canvas');
@@ -8,18 +10,31 @@ const clear = document.querySelector('button[value="clear"]');
 const sizes = document.querySelectorAll('.size');
 const range = document.querySelector('input[type="range"]');
 
-canvas.onmousedown = (e) => {
-  isMouseDown = true;
-  e.preventDefault();
+function generateGrid(length) {
+  while (canvas.firstChild) {
+    canvas.firstChild.remove();
+  }
+  canvas.style.setProperty('grid-template-columns', `repeat(${length}, 1fr)`);
+  canvas.style.setProperty('grid-template-rows', `repeat(${length}, 1fr)`);
+  for (let i = 0; i < length * length; i++) {
+    const square = document.createElement('div');
+    square.style.backgroundColor = '#ffffff';
+    square.style.opacity = 1;
+    square.counter = 0;
+    canvas.append(square);
+  };
 }
 
-canvas.onmouseup = () => {
-  isMouseDown = false;
+function reset() {
+  buttons.forEach(button => {
+    button.classList.remove('selected');
+  });
+  mode = '';
 }
 
-color.addEventListener('change', () => {
-  selectedColor = color.value;
-})
+function randomizeColor() {
+  return Math.floor(Math.random() * 256);
+}
 
 buttons.forEach(button => {
   button.addEventListener('click', e => {
@@ -27,22 +42,33 @@ buttons.forEach(button => {
       button.classList.remove('selected');
     });
     e.target.classList.add('selected');
-    mode = e.target.value;  
+    mode = e.target.value;
   });
 })
 
+canvas.addEventListener('mousedown', e => {
+  isMouseDown = true;
+  e.preventDefault();
+})
+
+canvas.addEventListener('mouseup', () => isMouseDown = false);
+
+color.addEventListener('change', () => {
+  selectedColor = color.value;
+})
+
 fill.addEventListener('click', () => {
-  canvas.childNodes.forEach(box => {
-    box.style.backgroundColor = selectedColor;
-    box.style.opacity = 1;
+  canvas.childNodes.forEach(square => {
+    square.style.backgroundColor = selectedColor;
+    square.style.opacity = 1;
   });
   reset();
 })
 
 clear.addEventListener('click', () => {
-  canvas.childNodes.forEach(box => {
-    box.style.backgroundColor = '#ffffff';
-    box.style.opacity = 1;
+  canvas.childNodes.forEach(square => {
+    square.style.backgroundColor = '#ffffff';
+    square.style.opacity = 1;
   });
   reset();
 })
@@ -59,58 +85,31 @@ range.addEventListener('change', () => {
 })
 
 canvas.addEventListener('mouseover', e => {
-  canvas.style.setProperty('cursor', 'pointer');
-  if (!['normal', 'shade', 'rgb', 'erase'].includes(mode)) {
+  if (mode === '') {
     canvas.style.setProperty('cursor', 'not-allowed');
     return;
   }
+  canvas.style.setProperty('cursor', 'pointer');
   if (!isMouseDown) return;
-  let box = e.target;
+  const square = e.target;
   switch (mode) {
     case 'normal':
-      box.style.backgroundColor = selectedColor;
-      box.style.opacity = 1;    
+      square.style.backgroundColor = selectedColor;
+      square.style.opacity = 1;
       break;
     case 'shade':
-      box.counter += 1;
-      box.style.backgroundColor = selectedColor;
-      box.style.opacity = 0.1 * box.counter;    
+      square.counter += 1;
+      square.style.backgroundColor = selectedColor;
+      square.style.opacity = 0.1 * square.counter;
       break;
     case 'rgb':
-      box.style.backgroundColor = `rgb(${randomizer()}, ${randomizer()}, ${randomizer()})`;
-      box.style.opacity = 1;    
+      square.style.backgroundColor = `rgb(${randomizeColor()}, ${randomizeColor()}, ${randomizeColor()})`;
+      square.style.opacity = 1;
       break;
     case 'erase':
-      box.style.backgroundColor = '#ffffff';
-      box.style.opacity = 1;    
-      break;
+      square.style.backgroundColor = '#ffffff';
+      square.style.opacity = 1;
   }
 })
-
-function generateGrid(length) {
-  while (canvas.firstChild) {
-    canvas.firstChild.remove();
-  }
-  canvas.style.setProperty('grid-template-columns', 'repeat(' + length + ', 1fr)');
-  canvas.style.setProperty('grid-template-rows', 'repeat(' + length + ', 1fr)');
-  for (let i = 0; i < length * length; i++) {
-    const square = document.createElement('div');
-    square.style.backgroundColor = '#ffffff';
-    square.style.opacity = 1;
-    square.counter = 0;
-    canvas.appendChild(square);
-  };
-}
-
-function randomizer() {
-  return Math.floor(Math.random() * 255);
-}
-
-function reset() {
-  buttons.forEach(button => {
-    button.classList.remove('selected');
-  });
-  mode = "";
-}
 
 generateGrid(32);

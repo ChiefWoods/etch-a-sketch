@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etch-A-Sketch</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
 
-<body>
-  <main>
-    <div class="container">
-      <div class="container-top">
-        <span class="name">Etch - A - Sketch</span>
+  <body>
+    <!-- <main>
+      <div class="container">
+        <div class="container-top">
+          <span class="name">Etch - A - Sketch</span>
+        </div>
+        <div class="container-middle">
+          <div class="tab-left">
+            <input type="color" value="#000000">
+            <button class="mode selected" value="normal">NORMAL</button>
+            <button class="mode" value="shade">SHADE</button>
+            <button class="mode" value="rgb">RGB</button>
+            <button value="fill">FILL</button>
+          </div>
+          <div class="canvas"></div>
+          <div class="tab-right">
+            <button class="mode" value="erase">ERASE</button>
+            <button value="clear">CLEAR</button>
+            <label for="resize">Size : <span class="size">32</span> &#215; <span class="size">32</span></label>
+            <input type="range" name="resize" min="16" max="100" value="32">
+          </div>
+        </div>
+        <div class="container-bottom">
+          <div class="knob-left"></div>
+          <div class="knob-right"></div>
+        </div>
       </div>
+    </main> -->
+    <main>
+      <h1 class="title">Etch - A - Sketch</h1>
       <div class="container-middle">
         <div class="tab-left">
           <input type="color" value="#000000">
@@ -36,16 +60,15 @@
         <div class="knob-left"></div>
         <div class="knob-right"></div>
       </div>
-    </div>
-  </main>
-  <footer>
-    <span class="made-by">Copyright @
-      <script>document.write(new Date().getFullYear())</script> ChiefWoods
-    </span>
-    <a class="github-link" href="https://github.com/ChiefWoods/etch-a-sketch" target="_blank">
-      <img src="./icons/github.svg" class="github-icon" alt="GitHub">
-    </a>
-  </footer>
-</body>
+    </main>
+    <footer>
+      <span class="made-by">Copyright @
+        <script>document.write(new Date().getFullYear())</script> ChiefWoods
+      </span>
+      <a class="github-link" href="https://github.com/ChiefWoods/etch-a-sketch" target="_blank">
+        <img src="./icons/github.svg" class="github-icon" alt="GitHub">
+      </a>
+    </footer>
+  </body>
 
 </html>
