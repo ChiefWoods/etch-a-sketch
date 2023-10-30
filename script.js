@@ -1,7 +1,3 @@
-let selectedColor = '#000000';
-let mode = 'normal';
-let isMouseDown = false;
-
 const buttons = document.querySelectorAll('.mode');
 const canvas = document.querySelector('.canvas');
 const color = document.querySelector('input[type="color"]');
@@ -10,12 +6,18 @@ const clear = document.querySelector('button[value="clear"]');
 const sizes = document.querySelectorAll('.size');
 const range = document.querySelector('input[type="range"]');
 
+let selectedColor = '#000000';
+let mode = 'normal';
+let isMouseDown = false;
+
 function generateGrid(length) {
   while (canvas.firstChild) {
     canvas.firstChild.remove();
   }
+  
   canvas.style.setProperty('grid-template-columns', `repeat(${length}, 1fr)`);
   canvas.style.setProperty('grid-template-rows', `repeat(${length}, 1fr)`);
+
   for (let i = 0; i < length * length; i++) {
     const square = document.createElement('div');
     square.style.backgroundColor = '#ffffff';
@@ -89,9 +91,11 @@ canvas.addEventListener('mouseover', e => {
     canvas.style.setProperty('cursor', 'not-allowed');
     return;
   }
+  
   canvas.style.setProperty('cursor', 'pointer');
   if (!isMouseDown) return;
   const square = e.target;
+
   switch (mode) {
     case 'normal':
       square.style.backgroundColor = selectedColor;
